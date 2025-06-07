@@ -1,0 +1,323 @@
+/* Windows XP-style common CSS - Scoped to mikawa/ pages only */
+
+/* Base window style */
+.mikawa-app .mikawa-window,
+.mikawa-app .quiz-window,
+.mikawa-app .success-window,
+.mikawa-app .fail-window {
+  font-family: 'Tahoma', 'Segoe UI', sans-serif;
+  font-size: 16px; /* Increased base font size */
+  background-color: #ECE9D8;
+  border: 1px solid #0054E3;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
+  width: 100%;
+  margin: 2rem auto;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Window header style - Classic Windows XP blue gradient */
+.mikawa-app .window-header {
+  background: linear-gradient(to right, #0A246A, #3A6EA5, #0A246A);
+  color: white;
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  user-select: none;
+  border-bottom: 1px solid #2A5B9C;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  height: 28px;
+}
+
+.mikawa-app .window-title {
+  flex-grow: 1;
+  padding-left: 22px; /* space for icon */
+  position: relative;
+  font-size: 16px; /* Increased from 13px */
+  letter-spacing: 0.5px;
+}
+
+/* Window icon */
+.mikawa-app .window-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-image: url('/mikawa/512.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.mikawa-app .window-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.mikawa-app .control {
+  width: 21px;
+  height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px; /* Increased from 13px */
+  border-radius: 3px;
+  cursor: pointer;
+  background: linear-gradient(to bottom, #F0F0F0, #DEE0E5);
+  color: #000;
+  font-weight: bold;
+  border: 1px solid #2A5B9C;
+}
+
+.mikawa-app .control:hover {
+  background: linear-gradient(to bottom, #F5F5F5, #E5E8EF);
+}
+
+.mikawa-app .control.minimize {
+  font-size: 15px; /* Increased from 12px */
+  font-weight: bold;
+}
+
+.mikawa-app .control.maximize {
+  font-size: 13px; /* Increased from 10px */
+}
+
+.mikawa-app .control.close {
+  background: linear-gradient(to bottom, #E75050, #C00000);
+  color: white;
+}
+
+.mikawa-app .control.close:hover {
+  background: linear-gradient(to bottom, #FF2020, #DF0000);
+}
+
+/* Window content style */
+.mikawa-app .window-content {
+  padding: 15px;
+  flex-grow: 1;
+  background-color: #ECE9D8; /* Classic XP beige */
+  overflow: auto;
+  border: 1px solid #fff;
+  border-top: none;
+}
+
+/* Window footer style */
+.mikawa-app .window-footer {
+  background-color: #ECE9D8;
+  border-top: 1px solid #D0D0D0;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  font-size: 14px; /* Increased from 11px */
+  color: #444;
+  height: 22px;
+}
+
+/* XP Button styles */
+.mikawa-app button {
+  background: linear-gradient(to bottom, #F9F9F9, #E3E3E3);
+  border: 1px solid #A9A9A9;
+  border-radius: 3px;
+  padding: 5px 15px;
+  font-family: 'Tahoma', 'Segoe UI', sans-serif;
+  font-size: 15px; /* Increased from 12px */
+  color: #000;
+  cursor: pointer;
+  min-width: 100px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.mikawa-app button:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #FEFEFE, #ECECEC);
+  border-color: #7EB4EA; /* Classic XP blue highlight */
+}
+
+.mikawa-app button:active:not(:disabled) {
+  background: linear-gradient(to bottom, #E3E3E3, #F9F9F9);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  border-color: #569DE5;
+}
+
+.mikawa-app button:focus {
+  outline: 1px dotted #000;
+  outline-offset: 2px;
+}
+
+.mikawa-app button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* XP special buttons - green */
+.mikawa-app .start-button, 
+.mikawa-app .submit-button,
+.mikawa-app .startup-button {
+  background: linear-gradient(to bottom, #AEE239, #8FBC22);
+  border: 1px solid #719A1F;
+  color: #2C5301;
+  font-weight: bold;
+  padding: 6px 18px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  font-size: 16px; /* Increased font size */
+}
+
+.mikawa-app .start-button:hover:not(:disabled), 
+.mikawa-app .submit-button:hover:not(:disabled),
+.mikawa-app .startup-button:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #C5FF39, #A6D42A);
+  border-color: #8AB929;
+}
+
+.mikawa-app .start-button:active:not(:disabled), 
+.mikawa-app .submit-button:active:not(:disabled),
+.mikawa-app .startup-button:active:not(:disabled) {
+  background: linear-gradient(to bottom, #8FBC22, #AEE239);
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Common container style - Blue desktop background */
+.mikawa-app .mikawa-container,
+.mikawa-app .quiz-page,
+.mikawa-app .success-page,
+.mikawa-app .fail-page {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #04664c; /* Windows XP default blue */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* XP style progress bar */
+.mikawa-app .progress-bar {
+  width: 100%;
+  height: 20px;
+  border: 1px solid #919B9C;
+  background-color: #FFFFFF;
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.mikawa-app .progress-fill {
+  height: 100%;
+  background: linear-gradient(to bottom, #5CB1FF, #3D95FF);
+  transition: width 0.3s ease-in-out;
+  border-right: 1px solid #2476D9;
+}
+
+/* XP Container boxes */
+.mikawa-app .instruction-box {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 3px;
+  padding: 15px;
+  margin: 15px 0;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+  font-size: 15px; /* Increased font size */
+}
+
+/* XP style group boxes */
+.mikawa-app .group-box {
+  border: 1px solid #7A98AF;
+  border-radius: 3px;
+  margin: 10px 0;
+  padding: 20px 15px 15px;
+  position: relative;
+}
+
+.mikawa-app .group-box-title {
+  position: absolute;
+  top: -8px;
+  left: 10px;
+  padding: 0 5px;
+  font-size: 14px; /* Increased from 11px */
+  background-color: #ECE9D8;
+  color: #003399;
+}
+
+/* XP style form controls */
+.mikawa-app input, 
+.mikawa-app select, 
+.mikawa-app textarea {
+  border: 1px solid #7A98AF;
+  padding: 4px 6px;
+  font-family: 'Tahoma', 'Segoe UI', sans-serif;
+  font-size: 15px; /* Increased from 12px */
+  border-radius: 2px;
+  background-color: white;
+}
+
+.mikawa-app input:focus, 
+.mikawa-app select:focus, 
+.mikawa-app textarea:focus {
+  border-color: #3D95FF;
+  outline: none;
+}
+
+/* Additional XP UI elements */
+.mikawa-app .xp-checkbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 15px; /* Increased from 12px */
+  user-select: none;
+}
+
+.mikawa-app .xp-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.mikawa-app .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: white;
+  border: 1px solid #7A98AF;
+  border-radius: 2px;
+}
+
+.mikawa-app .xp-checkbox:hover input ~ .checkmark {
+  border-color: #3D95FF;
+}
+
+.mikawa-app .xp-checkbox input:checked ~ .checkmark {
+  background-color: #3D95FF;
+  border-color: #2476D9;
+}
+
+.mikawa-app .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.mikawa-app .xp-checkbox input:checked ~ .checkmark:after {
+  display: block;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}

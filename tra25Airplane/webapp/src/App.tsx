@@ -3,6 +3,10 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Airplane from './pages/Airplane';
 import NotFound from './pages/NotFound';
+import MikawaProgram from './pages/mikawa/MikawaProgram';
+import QuizPage from './pages/mikawa/QuizPage';
+import SuccessPage from './pages/mikawa/SuccessPage';
+import FailPage from './pages/mikawa/FailPage';
 
 // ルーターの設定
 const router = createBrowserRouter([
@@ -21,6 +25,23 @@ const router = createBrowserRouter([
       }
     ],
   },
+  // Mikawa program routes
+  {
+    path: '/mikawa',
+    element: <MikawaProgram />,
+  },
+  {
+    path: '/mikawa/quiz',
+    element: <QuizPage />,
+  },
+  {
+    path: '/mikawa/success',
+    element: <SuccessPage />,
+  },
+  {
+    path: '/mikawa/fail',
+    element: <FailPage />,
+  }
 ]);
 
 function App() {

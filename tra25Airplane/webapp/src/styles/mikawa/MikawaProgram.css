@@ -1,0 +1,160 @@
+@import './WindowsXP.css';
+
+.mikawa-window {
+  max-width: 900px; /* Increased from 700px */
+  min-height: 550px; /* Added minimum height */
+}
+
+.mikawa-container {
+  background-color: #245EDC; /* Windows XP blue */
+}
+
+.program-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 20px;
+  background-image: url('/mikawa/512.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.mikawa-window h1 {
+  text-align: center;
+  color: #003399;
+  margin-bottom: 15px;
+  font-size: 22px; /* Increased from 18px */
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.5px;
+}
+
+.description {
+  text-align: center;
+  margin: 12px 0 20px;
+  line-height: 1.5;
+  font-size: 16px; /* Increased from 12px */
+  color: #333333;
+}
+
+.instruction-box {
+  margin: 20px 0;
+  background-color: #EFF3FF; /* Light blue XP panel */
+  border: 1px solid #7A98AF;
+  border-radius: 3px;
+}
+
+.instruction-box h2 {
+  font-size: 18px; /* Increased from 14px */
+  color: #003399;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  background-image: url('/mikawa/512.png');
+  background-size: 16px;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+.instruction-box ul {
+  list-style-type: square;
+  padding-left: 20px;
+  margin-left: 5px;
+}
+
+.instruction-box li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+  font-size: 16px; /* Increased from 12px */
+}
+
+.warning-box {
+  background-color: #FFF8E2; /* Pale yellow warning */
+  border: 1px solid #E8D7B0;
+  border-radius: 3px;
+  padding: 10px 15px 10px 40px;
+  margin: 15px 0;
+  color: #8A6500;
+  font-size: 16px; /* Increased from 12px */
+  position: relative;
+}
+
+.warning-box::before {
+  content: "!";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: #FFC107;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-size: 14px;
+}
+
+.warning-box p {
+  margin: 5px 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px solid #D0D0D0;
+}
+
+.start-button {
+  padding: 6px 20px;
+  font-size: 16px; /* Increased from 13px */
+  margin-bottom: 10px;
+}
+
+.start-button.starting {
+  background: linear-gradient(to bottom, #999999, #777777);
+  border-color: #666666;
+  animation: pulse 1.5s infinite;
+}
+
+/* XP style separator */
+.separator {
+  height: 1px;
+  background-color: #D0D0D0;
+  margin: 15px 0;
+  border: none;
+}
+
+/* XP style info panel */
+.info-panel {
+  background-color: #EFF3FF;
+  border: 1px solid #7A98AF;
+  border-radius: 3px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px; /* Increased from 12px */
+  line-height: 1.5;
+}
+
+.info-panel-header {
+  color: #003399;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}

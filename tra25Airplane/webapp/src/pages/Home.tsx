@@ -1,10 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
   return (
     <div className="page home-page">
-      <h1>ホームページ</h1>
-      <p>ようこそ、React Router を使ったシングルページアプリケーションへ！</p>
+      <p>PACTravel2025 謎解き</p>
+      
+      <div style={{ marginTop: '20px' }}>
+        <h2>アプリケーション</h2>
+        <ul>
+          <li>
+            <Link to="/mikawa">七不思議解明プログラム</Link>
+          </li>
+          <li>
+            <Link to="/ticket">航空券予約</Link>
+          </li>          
+        </ul>
+      </div>
     </div>
   );
 }

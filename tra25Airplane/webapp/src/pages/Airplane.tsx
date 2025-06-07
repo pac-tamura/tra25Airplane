@@ -263,7 +263,7 @@ const SearchAirplane: React.FC = () => {
                                 boxShadow: 2,
                                 px: 4,
                                 py: 2,
-                                marginTop: 10,
+                                marginTop: 15,
                                 marginBottom: -10,
                             }}
                         >
@@ -554,7 +554,7 @@ const SearchAirplane: React.FC = () => {
                                                     </MenuItem>
                                                 ))}
                                             </TextField>
-                                            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                                            {!showCancel && (<Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
                                                 <Button
                                                     variant="contained"
                                                     onClick={handleNext}
@@ -571,7 +571,7 @@ const SearchAirplane: React.FC = () => {
                                                 >
                                                     次へ
                                                 </Button>
-                                            </Box>
+                                            </Box>)}
                                         </Grid>
                                     )}
                                     {error && (
@@ -598,7 +598,7 @@ const SearchAirplane: React.FC = () => {
                                                         '&:hover': { bgcolor: '#1976d2', color: '#fff', borderColor: '#1976d2' }
                                                     }}
                                                 >
-                                                    キャンセル
+                                                    はい
                                                 </Button>
                                             </Box>
                                         </Grid>
