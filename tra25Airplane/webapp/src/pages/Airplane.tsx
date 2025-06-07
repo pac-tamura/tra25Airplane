@@ -75,18 +75,16 @@ const SearchAirplane: React.FC = () => {
 
     // 予約キャンセル表示
     const [showCancel, setShowCancel] = useState(false);
+    
+    // キャンセル完了とチケット表示の状態
+    const [cancelComplete, setCancelComplete] = useState(false);
 
     const handleTabChange = (_: any, newValue: number) => setTab(newValue);
 
     const handleCancel = () => {
-        alert('情報をキャンセルしました');
-        setStep(0);
-        setId('');
-        setPw('');
-        setMusic('');
-        setAirline('');
+        // キャンセル完了状態をtrueに設定
+        setCancelComplete(true);
         setShowCancel(false);
-        setError('');
     };
 
     // ステップごとのバリデーション
@@ -119,6 +117,124 @@ const SearchAirplane: React.FC = () => {
             }
         }
     };
+
+    // インドネシア行きチケットコンポーネント
+    const IndonesiaTicket = () => (
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4, mb: 2 }}>
+            <Paper 
+                elevation={3}
+                sx={{
+                    width: '85%',
+                    maxWidth: 700,
+                    borderRadius: 2,
+                    overflow: 'hidden',
+                    background: 'linear-gradient(45deg, #1565c0 30%, #0d47a1 90%)',
+                    position: 'relative'
+                }}
+            >
+                {/* チケットの角を切り落としたような装飾 */}
+                <Box className={ap_style.ticket_punch_left}></Box>
+                <Box className={ap_style.ticket_punch_right}></Box>
+                
+                {/* チケットヘッダー */}
+                <Box sx={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    p: 2, 
+                    borderBottom: '2px dashed rgba(255,255,255,0.3)',
+                    bgcolor: 'rgba(255,255,255,0.1)'
+                }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <img 
+                            src={Logo} 
+                            alt="ヨルム航空" 
+                            style={{ height: 40, marginRight: 12 }} 
+                        />
+                        <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>
+                            ヨルム航空
+                        </Typography>
+                    </Box>
+                    <Box>
+                        <Typography variant="body2" sx={{ color: '#fff', opacity: 0.9 }}>
+                            Boarding Pass / E-Ticket
+                        </Typography>
+                        <Typography variant="h6" sx={{ color: '#fff', fontWeight: 700 }}>
+                            YR-1234
+                        </Typography>
+                    </Box>
+                </Box>
+                
+                {/* チケット内容 */}
+                <Box sx={{ p: 3, color: '#fff' }}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} sm={6}>
+                            <Typography variant="body2" sx={{ opacity: 0.7 }}>出発</Typography>
+                            <Typography variant="h5" sx={{ fontWeight: 700, mb: 0.5 }}>成田国際空港 (NRT)</Typography>
+                            <Typography variant="body1">2025年5月15日 10:30</Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Typography variant="body2" sx={{ opacity: 0.7 }}>到着</Typography>
+                            <Typography variant="h5" sx={{ fontWeight: 700, mb: 0.5 }}>ジャカルタ (CGK)</Typography>
+                            <Typography variant="body1">2025年5月15日 16:45</Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Typography variant="body2" sx={{ opacity: 0.7 }}>乗客名</Typography>
+                            <Typography variant="body1" sx={{ fontWeight: 700 }}>田中 太郎様</Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Typography variant="body2" sx={{ opacity: 0.7 }}>座席</Typography>
+                            <Typography variant="body1" sx={{ fontWeight: 700 }}>25A (ビジネスクラス)</Typography>
+                        </Grid>
+                    </Grid>
+                    
+                    <Box sx={{ mt: 3, pt: 2, borderTop: '1px solid rgba(255,255,255,0.2)' }}>
+                        <Typography variant="body2" sx={{ opacity: 0.7, mb: 1 }}>備考</Typography>
+                        <Typography variant="body2">
+                            このチケットは2025年5月15日のフライトに有効です。出発の2時間前までに空港チェックインカウンターまでお越しください。
+                        </Typography>
+                    </Box>
+                </Box>
+                
+                {/* バーコード部分 */}
+                <Box sx={{ 
+                    p: 2, 
+                    bgcolor: '#fff', 
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                }}>
+                    <Typography variant="body2" sx={{ color: '#333', fontWeight: 700 }}>
+                        予約番号: YR-1234-5678-90
+                    </Typography>
+                    <Box sx={{ 
+                        width: 120, 
+                        height: 40, 
+                        bgcolor: '#000', 
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between'
+                    }}>
+                        {/* 模擬的なバーコード */}
+                        {[...Array(5)].map((_, i) => (
+                            <Box key={i} sx={{ height: 5, bgcolor: i % 2 === 0 ? '#000' : '#fff' }}></Box>
+                        ))}
+                    </Box>
+                </Box>
+            </Paper>
+        </Box>
+    );
+
+    // キャンセル完了メッセージ
+    const CancellationMessage = () => (
+        <Box sx={{ textAlign: 'center', mt: 2, mb: 4 }}>
+            <Typography variant="h5" sx={{ color: '#1976d2', fontWeight: 700 }}>
+                予約のキャンセルが完了しました。
+            </Typography>
+            <Typography variant="body1" sx={{ mt: 1, color: '#555' }}>
+                以下のチケット情報をご確認ください。
+            </Typography>
+        </Box>
+    );
 
     return (
         <Box
@@ -300,311 +416,321 @@ const SearchAirplane: React.FC = () => {
                             borderRadius: 4,
                             width: '100%',
                             maxWidth: 1000,
-                            height: 550,
+                            height: 'auto',
+                            minHeight: 550,
                             overflow: 'auto',
                             bgcolor: '#fff',
                             color: '#222',
                         }}>
-                            <Tabs
-                                value={tab}
-                                onChange={handleTabChange}
-                                centered
-                                sx={{
-                                    mb: 1,
-                                    '& .MuiTab-root': {
-                                        color: '#222',
-                                    },
-                                    '& .Mui-selected': {
-                                        color: '#1976d2 !important',
-                                    },
-                                    '& .MuiTabs-indicator': {
-                                        backgroundColor: '#1976d2',
-                                    },
-                                }}
-                            >
-                                <Tab label="予約" sx={{ fontWeight: tab === 0 ? 700 : 400 }} />
-                                <Tab label="運航状況" />
-                                <Tab label="国際線予約確認" />
-                                <Tab label="海外ツアー予約確認" />
-                                <Tab label="チェックイン" />
-                                <Tab label="領収書" />
-                            </Tabs>
-                            <Box sx={{ display: 'flex', gap: 2, mb: 2, borderBottom: '1px solid #1976d2', pb: 0.5, marginTop: 3 }}>
-                                <Typography sx={{ color: '#1976d2', fontWeight: 700, pb: 0.5 }}>航空券</Typography>
-                                <Typography sx={{ color: '#888' }}>航空券＋宿泊</Typography>
-                                <Typography sx={{ color: '#888' }}>特典航空券</Typography>
-                                <Typography sx={{ color: '#888' }}>ホテル</Typography>
-                                <Typography sx={{ color: '#888' }}>レンタカー</Typography>
-                            </Box>
+                            {cancelComplete ? (
+                                <>
+                                    <CancellationMessage />
+                                    <IndonesiaTicket />
+                                </>
+                            ) : (
+                                <>
+                                    <Tabs
+                                        value={tab}
+                                        onChange={handleTabChange}
+                                        centered
+                                        sx={{
+                                            mb: 1,
+                                            '& .MuiTab-root': {
+                                                color: '#222',
+                                            },
+                                            '& .Mui-selected': {
+                                                color: '#1976d2 !important',
+                                            },
+                                            '& .MuiTabs-indicator': {
+                                                backgroundColor: '#1976d2',
+                                            },
+                                        }}
+                                    >
+                                        <Tab label="予約" sx={{ fontWeight: tab === 0 ? 700 : 400 }} />
+                                        <Tab label="運航状況" />
+                                        <Tab label="国際線予約確認" />
+                                        <Tab label="海外ツアー予約確認" />
+                                        <Tab label="チェックイン" />
+                                        <Tab label="領収書" />
+                                    </Tabs>
+                                    <Box sx={{ display: 'flex', gap: 2, mb: 2, borderBottom: '1px solid #1976d2', pb: 0.5, marginTop: 3 }}>
+                                        <Typography sx={{ color: '#1976d2', fontWeight: 700, pb: 0.5 }}>航空券</Typography>
+                                        <Typography sx={{ color: '#888' }}>航空券＋宿泊</Typography>
+                                        <Typography sx={{ color: '#888' }}>特典航空券</Typography>
+                                        <Typography sx={{ color: '#888' }}>ホテル</Typography>
+                                        <Typography sx={{ color: '#888' }}>レンタカー</Typography>
+                                    </Box>
 
-                            <Box sx={{ width: '100%', maxWidth: 500, mx: 'auto', mt: 6 }}>
-                                <Grid container spacing={2} direction="column">
-                                    {step === 0 && (
-                                        <Grid item>
-                                            <TextField
-                                                label="ID"
-                                                fullWidth
-                                                value={id}
-                                                onChange={e => setId(e.target.value)}
-                                                placeholder="例：user1"
-                                                required
-                                                sx={{
-                                                    '& .MuiOutlinedInput-root': {
-                                                        '&.Mui-focused fieldset': {
-                                                            borderColor: '#1976d2',
-                                                        },
-                                                    },
-                                                    '& .MuiInputLabel-root': {
-                                                        color: '#1976d2',
-                                                    },
-                                                    '& .MuiInputLabel-root.Mui-focused': {
-                                                        color: '#1976d2',
-                                                    },
-                                                    '& input::placeholder': {
-                                                        color: '#c0c0c0',
-                                                        opacity: 1,
-                                                    },
-                                                }}
-                                                InputProps={{
-                                                    sx: {
-                                                        fontSize: '1rem',
-                                                        height: 60,
-                                                        color: '#222',
-                                                        background: '#fff',
-                                                    }
-                                                }}
-                                                InputLabelProps={{
-                                                    sx: { fontSize: '0.95rem', color: '#1976d2' }
-                                                }}
-                                            />
-                                            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={handleNext}
-                                                    sx={{
-                                                        px: 4,
-                                                        py: 1,
-                                                        fontSize: '1rem',
-                                                        bgcolor: '#1976d2',
-                                                        color: '#fff',
-                                                        borderRadius: 8,
-                                                        boxShadow: 2,
-                                                        '&:hover': { bgcolor: '#1565c0' }
-                                                    }}
-                                                >
-                                                    次へ
-                                                </Button>
-                                            </Box>
+                                    <Box sx={{ width: '100%', maxWidth: 500, mx: 'auto', mt: 6 }}>
+                                        <Grid container spacing={2} direction="column">
+                                            {step === 0 && (
+                                                <Grid item>
+                                                    <TextField
+                                                        label="ID"
+                                                        fullWidth
+                                                        value={id}
+                                                        onChange={e => setId(e.target.value)}
+                                                        placeholder="例：user1"
+                                                        required
+                                                        sx={{
+                                                            '& .MuiOutlinedInput-root': {
+                                                                '&.Mui-focused fieldset': {
+                                                                    borderColor: '#1976d2',
+                                                                },
+                                                            },
+                                                            '& .MuiInputLabel-root': {
+                                                                color: '#1976d2',
+                                                            },
+                                                            '& .MuiInputLabel-root.Mui-focused': {
+                                                                color: '#1976d2',
+                                                            },
+                                                            '& input::placeholder': {
+                                                                color: '#c0c0c0',
+                                                                opacity: 1,
+                                                            },
+                                                        }}
+                                                        InputProps={{
+                                                            sx: {
+                                                                fontSize: '1rem',
+                                                                height: 60,
+                                                                color: '#222',
+                                                                background: '#fff',
+                                                            }
+                                                        }}
+                                                        InputLabelProps={{
+                                                            sx: { fontSize: '0.95rem', color: '#1976d2' }
+                                                        }}
+                                                    />
+                                                    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                                                        <Button
+                                                            variant="contained"
+                                                            onClick={handleNext}
+                                                            sx={{
+                                                                px: 4,
+                                                                py: 1,
+                                                                fontSize: '1rem',
+                                                                bgcolor: '#1976d2',
+                                                                color: '#fff',
+                                                                borderRadius: 8,
+                                                                boxShadow: 2,
+                                                                '&:hover': { bgcolor: '#1565c0' }
+                                                            }}
+                                                        >
+                                                            次へ
+                                                        </Button>
+                                                    </Box>
+                                                </Grid>
+                                            )}
+                                            {step === 1 && (
+                                                <Grid item>
+                                                    <TextField
+                                                        label="PW"
+                                                        type="password"
+                                                        fullWidth
+                                                        value={pw}
+                                                        onChange={e => setPw(e.target.value)}
+                                                        placeholder="例：pass1"
+                                                        required
+                                                        sx={{
+                                                            '& .MuiOutlinedInput-root': {
+                                                                '&.Mui-focused fieldset': {
+                                                                    borderColor: '#1976d2',
+                                                                },
+                                                            },
+                                                            '& .MuiInputLabel-root': {
+                                                                color: '#1976d2',
+                                                            },
+                                                            '& .MuiInputLabel-root.Mui-focused': {
+                                                                color: '#1976d2',
+                                                            },
+                                                            '& input::placeholder': {
+                                                                color: '#c0c0c0',
+                                                                opacity: 1,
+                                                            },
+                                                        }}
+                                                        InputProps={{
+                                                            sx: {
+                                                                fontSize: '1rem',
+                                                                height: 60,
+                                                                color: '#222',
+                                                                background: '#fff',
+                                                            }
+                                                        }}
+                                                        InputLabelProps={{
+                                                            sx: { fontSize: '0.95rem', color: '#1976d2' }
+                                                        }}
+                                                    />
+                                                    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                                                        <Button
+                                                            variant="contained"
+                                                            onClick={handleNext}
+                                                            sx={{
+                                                                px: 4,
+                                                                py: 1,
+                                                                fontSize: '1rem',
+                                                                bgcolor: '#1976d2',
+                                                                color: '#fff',
+                                                                borderRadius: 8,
+                                                                boxShadow: 2,
+                                                                '&:hover': { bgcolor: '#1565c0' }
+                                                            }}
+                                                        >
+                                                            次へ
+                                                        </Button>
+                                                    </Box>
+                                                </Grid>
+                                            )}
+                                            {step === 2 && (
+                                                <Grid item>
+                                                    <TextField
+                                                        label="好きな音楽"
+                                                        fullWidth
+                                                        value={music}
+                                                        onChange={e => setMusic(e.target.value)}
+                                                        placeholder="例：J-POP"
+                                                        required
+                                                        sx={{
+                                                            '& .MuiOutlinedInput-root': {
+                                                                '&.Mui-focused fieldset': {
+                                                                    borderColor: '#1976d2',
+                                                                },
+                                                            },
+                                                            '& .MuiInputLabel-root': {
+                                                                color: '#1976d2',
+                                                            },
+                                                            '& .MuiInputLabel-root.Mui-focused': {
+                                                                color: '#1976d2',
+                                                            },
+                                                            '& input::placeholder': {
+                                                                color: '#c0c0c0',
+                                                                opacity: 1,
+                                                            },
+                                                        }}
+                                                        InputProps={{
+                                                            sx: {
+                                                                fontSize: '1rem',
+                                                                height: 60,
+                                                                color: '#222',
+                                                                background: '#fff',
+                                                            }
+                                                        }}
+                                                        InputLabelProps={{
+                                                            sx: { fontSize: '0.95rem', color: '#1976d2' }
+                                                        }}
+                                                    />
+                                                    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                                                        <Button
+                                                            variant="contained"
+                                                            onClick={handleNext}
+                                                            sx={{
+                                                                px: 4,
+                                                                py: 1,
+                                                                fontSize: '1rem',
+                                                                bgcolor: '#1976d2',
+                                                                color: '#fff',
+                                                                borderRadius: 8,
+                                                                boxShadow: 2,
+                                                                '&:hover': { bgcolor: '#1565c0' }
+                                                            }}
+                                                        >
+                                                            次へ
+                                                        </Button>
+                                                    </Box>
+                                                </Grid>
+                                            )}
+                                            {step === 3 && (
+                                                <Grid item>
+                                                    <TextField
+                                                        label="航空会社"
+                                                        select
+                                                        fullWidth
+                                                        value={airline}
+                                                        onChange={e => setAirline(e.target.value)}
+                                                        required
+                                                        sx={{
+                                                            '& .MuiOutlinedInput-root': {
+                                                                '&.Mui-focused fieldset': {
+                                                                    borderColor: '#1976d2',
+                                                                },
+                                                            },
+                                                            '& .MuiInputLabel-root': {
+                                                                color: '#1976d2',
+                                                            },
+                                                            '& .MuiInputLabel-root.Mui-focused': {
+                                                                color: '#1976d2',
+                                                            },
+                                                        }}
+                                                        InputProps={{
+                                                            sx: {
+                                                                fontSize: '1rem',
+                                                                height: 60,
+                                                                color: '#222',
+                                                                background: '#fff',
+                                                            }
+                                                        }}
+                                                        InputLabelProps={{
+                                                            sx: { fontSize: '0.95rem', color: '#1976d2' }
+                                                        }}
+                                                    >
+                                                        {airlineOptions.map(option => (
+                                                            <MenuItem key={option} value={option}>
+                                                                {option}
+                                                            </MenuItem>
+                                                        ))}
+                                                    </TextField>
+                                                    {!showCancel && (<Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                                                        <Button
+                                                            variant="contained"
+                                                            onClick={handleNext}
+                                                            sx={{
+                                                                px: 4,
+                                                                py: 1,
+                                                                fontSize: '1rem',
+                                                                bgcolor: '#1976d2',
+                                                                color: '#fff',
+                                                                borderRadius: 8,
+                                                                boxShadow: 2,
+                                                                '&:hover': { bgcolor: '#1565c0' }
+                                                            }}
+                                                        >
+                                                            次へ
+                                                        </Button>
+                                                    </Box>)}
+                                                </Grid>
+                                            )}
+                                            {error && (
+                                                <Grid item>
+                                                    <Typography sx={{ color: '#d32f2f', fontWeight: 500, textAlign: 'center' }}>{error}</Typography>
+                                                </Grid>
+                                            )}
+                                            {showCancel && (
+                                                <Grid item>
+                                                    <Typography sx={{ mb: 1, fontWeight: 600, color: '#1976d2', fontSize: '1rem', textAlign: 'center' }}>
+                                                        予約が見つかりました。キャンセルしますか？
+                                                    </Typography>
+                                                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                                        <Button
+                                                            variant="outlined"
+                                                            onClick={handleCancel}
+                                                            sx={{
+                                                                px: 4,
+                                                                py: 1,
+                                                                fontSize: '1rem',
+                                                                borderRadius: 8,
+                                                                color: '#1976d2',
+                                                                borderColor: '#1976d2',
+                                                                '&:hover': { bgcolor: '#1976d2', color: '#fff', borderColor: '#1976d2' }
+                                                            }}
+                                                        >
+                                                            はい
+                                                        </Button>
+                                                    </Box>
+                                                </Grid>
+                                            )}
                                         </Grid>
-                                    )}
-                                    {step === 1 && (
-                                        <Grid item>
-                                            <TextField
-                                                label="PW"
-                                                type="password"
-                                                fullWidth
-                                                value={pw}
-                                                onChange={e => setPw(e.target.value)}
-                                                placeholder="例：pass1"
-                                                required
-                                                sx={{
-                                                    '& .MuiOutlinedInput-root': {
-                                                        '&.Mui-focused fieldset': {
-                                                            borderColor: '#1976d2',
-                                                        },
-                                                    },
-                                                    '& .MuiInputLabel-root': {
-                                                        color: '#1976d2',
-                                                    },
-                                                    '& .MuiInputLabel-root.Mui-focused': {
-                                                        color: '#1976d2',
-                                                    },
-                                                    '& input::placeholder': {
-                                                        color: '#c0c0c0',
-                                                        opacity: 1,
-                                                    },
-                                                }}
-                                                InputProps={{
-                                                    sx: {
-                                                        fontSize: '1rem',
-                                                        height: 60,
-                                                        color: '#222',
-                                                        background: '#fff',
-                                                    }
-                                                }}
-                                                InputLabelProps={{
-                                                    sx: { fontSize: '0.95rem', color: '#1976d2' }
-                                                }}
-                                            />
-                                            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={handleNext}
-                                                    sx={{
-                                                        px: 4,
-                                                        py: 1,
-                                                        fontSize: '1rem',
-                                                        bgcolor: '#1976d2',
-                                                        color: '#fff',
-                                                        borderRadius: 8,
-                                                        boxShadow: 2,
-                                                        '&:hover': { bgcolor: '#1565c0' }
-                                                    }}
-                                                >
-                                                    次へ
-                                                </Button>
-                                            </Box>
-                                        </Grid>
-                                    )}
-                                    {step === 2 && (
-                                        <Grid item>
-                                            <TextField
-                                                label="好きな音楽"
-                                                fullWidth
-                                                value={music}
-                                                onChange={e => setMusic(e.target.value)}
-                                                placeholder="例：J-POP"
-                                                required
-                                                sx={{
-                                                    '& .MuiOutlinedInput-root': {
-                                                        '&.Mui-focused fieldset': {
-                                                            borderColor: '#1976d2',
-                                                        },
-                                                    },
-                                                    '& .MuiInputLabel-root': {
-                                                        color: '#1976d2',
-                                                    },
-                                                    '& .MuiInputLabel-root.Mui-focused': {
-                                                        color: '#1976d2',
-                                                    },
-                                                    '& input::placeholder': {
-                                                        color: '#c0c0c0',
-                                                        opacity: 1,
-                                                    },
-                                                }}
-                                                InputProps={{
-                                                    sx: {
-                                                        fontSize: '1rem',
-                                                        height: 60,
-                                                        color: '#222',
-                                                        background: '#fff',
-                                                    }
-                                                }}
-                                                InputLabelProps={{
-                                                    sx: { fontSize: '0.95rem', color: '#1976d2' }
-                                                }}
-                                            />
-                                            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={handleNext}
-                                                    sx={{
-                                                        px: 4,
-                                                        py: 1,
-                                                        fontSize: '1rem',
-                                                        bgcolor: '#1976d2',
-                                                        color: '#fff',
-                                                        borderRadius: 8,
-                                                        boxShadow: 2,
-                                                        '&:hover': { bgcolor: '#1565c0' }
-                                                    }}
-                                                >
-                                                    次へ
-                                                </Button>
-                                            </Box>
-                                        </Grid>
-                                    )}
-                                    {step === 3 && (
-                                        <Grid item>
-                                            <TextField
-                                                label="航空会社"
-                                                select
-                                                fullWidth
-                                                value={airline}
-                                                onChange={e => setAirline(e.target.value)}
-                                                required
-                                                sx={{
-                                                    '& .MuiOutlinedInput-root': {
-                                                        '&.Mui-focused fieldset': {
-                                                            borderColor: '#1976d2',
-                                                        },
-                                                    },
-                                                    '& .MuiInputLabel-root': {
-                                                        color: '#1976d2',
-                                                    },
-                                                    '& .MuiInputLabel-root.Mui-focused': {
-                                                        color: '#1976d2',
-                                                    },
-                                                }}
-                                                InputProps={{
-                                                    sx: {
-                                                        fontSize: '1rem',
-                                                        height: 60,
-                                                        color: '#222',
-                                                        background: '#fff',
-                                                    }
-                                                }}
-                                                InputLabelProps={{
-                                                    sx: { fontSize: '0.95rem', color: '#1976d2' }
-                                                }}
-                                            >
-                                                {airlineOptions.map(option => (
-                                                    <MenuItem key={option} value={option}>
-                                                        {option}
-                                                    </MenuItem>
-                                                ))}
-                                            </TextField>
-                                            {!showCancel && (<Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-                                                <Button
-                                                    variant="contained"
-                                                    onClick={handleNext}
-                                                    sx={{
-                                                        px: 4,
-                                                        py: 1,
-                                                        fontSize: '1rem',
-                                                        bgcolor: '#1976d2',
-                                                        color: '#fff',
-                                                        borderRadius: 8,
-                                                        boxShadow: 2,
-                                                        '&:hover': { bgcolor: '#1565c0' }
-                                                    }}
-                                                >
-                                                    次へ
-                                                </Button>
-                                            </Box>)}
-                                        </Grid>
-                                    )}
-                                    {error && (
-                                        <Grid item>
-                                            <Typography sx={{ color: '#d32f2f', fontWeight: 500, textAlign: 'center' }}>{error}</Typography>
-                                        </Grid>
-                                    )}
-                                    {showCancel && (
-                                        <Grid item>
-                                            <Typography sx={{ mb: 1, fontWeight: 600, color: '#1976d2', fontSize: '1rem', textAlign: 'center' }}>
-                                                予約が見つかりました。キャンセルしますか？
-                                            </Typography>
-                                            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                                <Button
-                                                    variant="outlined"
-                                                    onClick={handleCancel}
-                                                    sx={{
-                                                        px: 4,
-                                                        py: 1,
-                                                        fontSize: '1rem',
-                                                        borderRadius: 8,
-                                                        color: '#1976d2',
-                                                        borderColor: '#1976d2',
-                                                        '&:hover': { bgcolor: '#1976d2', color: '#fff', borderColor: '#1976d2' }
-                                                    }}
-                                                >
-                                                    はい
-                                                </Button>
-                                            </Box>
-                                        </Grid>
-                                    )}
-                                </Grid>
-                            </Box>
+                                    </Box>
+                                </>
+                            )}
                         </Paper>
                     </Box>
                 </Box>
